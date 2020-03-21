@@ -1,7 +1,7 @@
 import React from "react";
 
 // Components
-import Directory from "../../directory/directory.component";
+import Directory from "../../components/directory/directory.component";
 
 // Style
 import "./homepage.styles.scss";
