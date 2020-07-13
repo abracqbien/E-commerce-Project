@@ -9,7 +9,7 @@ const config = {
   projectId: "crown-db-87db0",
   storageBucket: "crown-db-87db0.appspot.com",
   messagingSenderId: "403801245645",
-  appId: "1:403801245645:web:de451593fcdbabac00e684"
+  appId: "1:403801245645:web:de451593fcdbabac00e684",
 };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
@@ -17,7 +17,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
   const userRef = firestore.doc(`users/${userAuth.uid}`);
   const snapShot = await userRef.get();
-
+  console.log("snapShot", snapShot);
   if (!snapShot.exists) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
@@ -27,7 +27,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         displayName,
         email,
         createdAt,
-        ...additionalData
+        ...additionalData,
       });
     } catch (error) {
       console.log("error creating user", error.message);
