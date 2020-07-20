@@ -1,7 +1,9 @@
 import React from "react"
 
+// Images SVG
 import { ReactComponent as ShoppindIcon } from "../../assets/shopping-bag.svg"
 
+// Styles
 import "./cart-icon.styles.scss"
 
 const CartIcon = () => (

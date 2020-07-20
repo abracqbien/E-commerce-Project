@@ -11,7 +11,8 @@ import { ReactComponent as Logo } from "../../assets/crown.svg"
 // Styles
 import "./header.styles.scss"
 
-// Component
+// Components
+import CartDropdown from "../cart-dropdown/cart-dropdown.component"
 import CartIcon from "../cart-icon/cart-icon.component"
 
 const Header = ({ currentUser }) => (
@@ -37,6 +38,7 @@ const Header = ({ currentUser }) => (
       )}
       <CartIcon />
     </div>
+    <CartDropdown />
   </div>
 )
 
