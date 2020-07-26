@@ -5,6 +5,7 @@ import { createStructuredSelector } from "reselect"
 
 // Components
 import CollectionOverview from "../../components/collections-overview/collections-overview.component"
+import WithSpinner from "../../components/with-spinner/with-spinner.component"
 
 // Pages
 import CollectionPage from "../collection/collection.component"
@@ -21,7 +22,14 @@ import {
   convertCollectionsSnapshotToMap,
 } from "../../firebase/firebase.utils"
 
+const CollectionOverviewWithSpinner = WithSpinner(CollectionOverview)
+const CollectionPageWithSpinner = WithSpinner(CollectionPage)
+
 class ShopPage extends Component {
+  state = {
+    loading: true,
+  }
+
   unsubscribeFromSnapshot = null
 
   componentDidMount() {
@@ -31,18 +39,31 @@ class ShopPage extends Component {
     collectionRef.onSnapshot(async snapshot => {
       const collectionsMap = convertCollectionsSnapshotToMap(snapshot)
       updateCollections(collectionsMap)
+
+      this.setState({
+        loading: false,
+      })
     })
   }
 
   render() {
     const { match } = this.props
+    const { loading } = this.state
 
     return (
       <div className="shop-page">
-        <Route exact path={`${match.path}`} component={CollectionOverview} />
+        <Route
+          exact
+          path={`${match.path}`}
+          render={props => (
+            <CollectionOverviewWithSpinner isLoading={loading} {...props} />
+          )}
+        />
         <Route
           path={`${match.path}/:collectionId`}
-          component={CollectionPage}
+          render={props => (
+            <CollectionPageWithSpinner isLoading={loading} {...props} />
+          )}
         />
       </div>
     )
