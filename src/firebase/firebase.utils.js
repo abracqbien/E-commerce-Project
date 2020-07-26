@@ -27,7 +27,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         displayName,
         email,
         createdAt,
-        ...additionalData
+        ...additionalData,
       })
     } catch (error) {
       console.log("error creating user", error.message)
@@ -35,6 +35,11 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   }
 
   return userRef
+}
+
+export const addCollectionAndItems = (collectionKey, objectsToAdd) => {
+  const collectionRef = firestore.collection(collectionKey)
+  console.log(collectionRef)
 }
 
 firebase.initializeApp(config)
